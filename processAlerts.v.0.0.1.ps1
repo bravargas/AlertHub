@@ -29,9 +29,6 @@ function Update-Record {
 
 }
 
-# Load all records from the CSV file
-$allRecords = Import-Csv -Path "records.csv"
-
 function New-Record {
     param (
         [string]$customId,
@@ -83,6 +80,16 @@ function Show-RecordList {
     } else {
         Write-Host "Invalid selection. Please choose a valid record number."
     }
+}
+
+# Check if the file exists
+if (Test-Path -Path "records.csv") {
+    # Load all records from the CSV file
+    $allRecords = Import-Csv -Path "records.csv"
+
+    # Rest of your script (e.g., function calls, record updates, etc.)
+} else {
+    Write-Host "The file 'records.csv' does not exist. Please create it or provide the correct path."
 }
 
 $newCustomID = [Guid]::NewGuid()
